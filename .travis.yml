@@ -1,5 +1,12 @@
 language: node_js
 node_js:
- - "0.10"
- - "0.8"
- - "0.6"
+- '0.10'
+- '0.8'
+- '0.6'
+deploy:
+  provider: heroku
+  api_key:
+    secure: OI2iT0MxSuEGYU5WMpD7kIacQciUQMG3k/m7tgNwu6Whvd/vbnYso7VlGDNhUDtQKBSPEjvLqOtH2EqdAJyyLZ5Zps14pi7jbnkaoetsFtyZwydxmysFVAwFFJtCWYyz5J4uPhna6lxq++ezsxqAkMNpfJ4ZFxpWDyp372V5aDE=
+  app: listyjs-dev
+  on:
+    repo: matthew-bb/listyjs
