@@ -8,5 +8,6 @@ deploy:
   api_key:
     secure: OI2iT0MxSuEGYU5WMpD7kIacQciUQMG3k/m7tgNwu6Whvd/vbnYso7VlGDNhUDtQKBSPEjvLqOtH2EqdAJyyLZ5Zps14pi7jbnkaoetsFtyZwydxmysFVAwFFJtCWYyz5J4uPhna6lxq++ezsxqAkMNpfJ4ZFxpWDyp372V5aDE=
   app: listyjs-dev
+  strategy: git
   on:
     repo: matthew-bb/listyjs
