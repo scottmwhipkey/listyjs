@@ -1,0 +1,66 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<style>
+		body    { background-color: #999; }
+		.output { margin-top: 20px; margin-bottom: 20px; width: 80%; margin-left: 10%; }
+	</style>
+</head>
+
+<body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script>
+
+  $(document).ready(function() {
+    var url = document.URL;
+    var sock = io.connect(url);
+
+    sock.on('update', function(data) {
+      out = '<div class="well output"><table class="table table-striped">';
+      for(le in data) {
+        out += '<trd><td>' + data[le].txt;
+	out += '</td><td>'
+        // out += '<input data-edit-id="' + data[le].id + '" class="edit_val"></input>';
+        out += '<button type="button" class="edit close" data-org-value="' + data[le].txt + '" data-edit-this="' + data[le].id + '">&Delta;</button>';
+        out += '</td><td><button type="button" class="rm close" id="' + data[le].id + '">&times;</button></td>';
+	out += '</tr>';
+      } 
+      out += '</table></div>';
+      $('#l').fadeOut(50);
+      $('#l').html(out);
+      $('#l').fadeIn(400);
+    });
+    
+    $('#add').click(function(e) {
+      var txt = $('#txt').val();
+      console.log(txt);
+      sock.emit('add_item', {'txt': txt });
+      $('#add-text').val('');
+    });
+
+    $(document).on('click', '.rm', function(e) {
+      id = $(this).attr('id');
+      sock.emit('del_item', {id: id});
+    });
+
+    $(document).on('click', '.edit', function(e) {
+      id = $(this).attr('data-edit-this');
+      var prmpt = prompt('New Value?', $(this).attr('data-org-value'));
+      if(prmpt != null) {
+        sock.emit('edit', {id : id, new_val : prmpt} );
+      }
+    });
+  });
+
+</script>
+
+<div id="in" class="well" style="text-align: center; width: 80%; margin-top: 20px; margin-left: 10%;">
+  <input id="txt"></input>
+  <button id="add">Add Item</button>
+</div>
+
+<div id="l"></div>
+
+</body></html>

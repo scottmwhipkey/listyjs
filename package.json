@@ -1,0 +1,11 @@
+{
+  "name": "listyjs",
+  "version": "0.0.1",
+  "description": "A simple list with basic chat using socket.io",
+  "dependencies": {
+    "socket.io": "0.9.x",
+    "node-uuid": "x",
+    "redis": "x",
+    "redis-url": "0.1.0"
+  }
+}    
